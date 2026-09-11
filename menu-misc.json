@@ -1,0 +1,86 @@
+{
+  "menu": "Online Menu",
+  "location": "Orlando",
+  "categories": [
+    {
+      "name": "Soups",
+      "sortOrder": 1,
+      "active": true
+    },
+    {
+      "name": "Chaat",
+      "sortOrder": 2,
+      "active": true
+    },
+    {
+      "name": "Appetizers",
+      "sortOrder": 3,
+      "active": true
+    },
+    {
+      "name": "From Our Tandoor - Veg & Non-Veg",
+      "sortOrder": 4,
+      "active": true
+    },
+    {
+      "name": "South Indian",
+      "sortOrder": 5,
+      "active": true
+    },
+    {
+      "name": "Vegetable Entrées",
+      "sortOrder": 6,
+      "active": true
+    },
+    {
+      "name": "Non-Vegetable Entrées",
+      "sortOrder": 7,
+      "active": true
+    },
+    {
+      "name": "Breads",
+      "sortOrder": 8,
+      "active": true
+    },
+    {
+      "name": "Rice & Noodles Specials",
+      "sortOrder": 9,
+      "active": true
+    },
+    {
+      "name": "Drinks",
+      "sortOrder": 10,
+      "active": false
+    },
+    {
+      "name": "Desserts",
+      "sortOrder": 11,
+      "active": true
+    },
+    {
+      "name": "Vegetarian Appetizers",
+      "sortOrder": 12,
+      "active": false
+    },
+    {
+      "name": "Beverage",
+      "sortOrder": 13,
+      "active": true
+    },
+    {
+      "name": "Beer",
+      "sortOrder": 14,
+      "active": true
+    },
+    {
+      "name": "Wine",
+      "sortOrder": 15,
+      "active": true
+    },
+    {
+      "name": "Online Menu: Home Screen",
+      "sortOrder": 16,
+      "active": false
+    }
+  ]
+}
