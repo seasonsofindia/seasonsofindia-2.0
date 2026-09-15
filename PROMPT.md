@@ -1,11 +1,11 @@
 # Build prompt
 
-Create a single-page, cinematic WebGL experience called **Kage**: a five-chapter night walk through a fictional Kyoto mountain temple. The result should feel like an editorial art book moving through a live 3D world, not a conventional product landing page.
+Create a single-page, cinematic WebGL experience for **Seasons of India**: a five-chapter journey through an atmospheric Indian fine-dining experience. The result should feel like an editorial art book moving through a live 3D world, not a conventional product landing page.
 
 ## Experience
 
 - Use a fixed full-viewport Three.js canvas as the environmental layer.
-- Build the temple, torii, stairs, lanterns, moon, terrain, trees, fog, rain, drifting leaves, embers, and atmosphere procedurally.
+- Build the dining house, arches, lanterns, seasonal textures, garden elements, fog, drifting leaves, embers, and atmosphere procedurally.
 - Drive one continuous camera path from page scroll. Each section should feel like a new composed shot rather than a hard scene replacement.
 - Add restrained bloom, film grain, vignette, depth haze, warm shoji light, cold moonlight, and a large vermilion moon.
 - Keep the palette near-black, blue-charcoal, warm amber, bone white, and vermilion.
