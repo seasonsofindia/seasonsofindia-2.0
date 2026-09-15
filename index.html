@@ -1,12 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Seasons of India — Modern Indian Fine Dining</title>
-<meta name="description" content="Seasons of India — a modern fine-dining experience celebrating seasonal Indian flavours. Reservations, tasting menus, private dining and culinary craft.">
+<title>Seasons of India | Indian Fine Dining in Orlando, FL</title>
+<meta name="description" content="Seasons of India: Indian fine dining in Orlando, FL. Explore our seasonal menu, book a table, or plan a private dining experience.">
+<link rel="canonical" href="https://seasonsofindia.com/">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Seasons of India | Indian Fine Dining in Orlando, FL">
+<meta property="og:description" content="Indian fine dining in Orlando, seasonal menus, private dining, and memorable evening experiences.">
+<meta property="og:url" content="https://seasonsofindia.com/">
+<meta property="og:type" content="restaurant">
+<meta property="og:image" content="https://seasonsofindia.com/assets/seasons-of-india-logo.png">
+<meta property="og:site_name" content="Seasons of India">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Seasons of India | Indian Fine Dining in Orlando, FL">
+<meta name="twitter:description" content="Indian fine dining in Orlando, seasonal menus, and private dining experiences.">
+<meta name="twitter:image" content="https://seasonsofindia.com/assets/seasons-of-india-logo.png">
 <link rel="icon" href="assets/seasons-of-india-logo.png" type="image/png">
 <link rel="stylesheet" href="secret-pathways-assets/fonts.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Seasons of India",
+  "image": "https://seasonsofindia.com/assets/seasons-of-india-logo.png",
+  "url": "https://seasonsofindia.com/",
+  "telephone": "+1-689-242-4441",
+  "servesCuisine": ["Indian", "Indo-Chinese"],
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "7085 S Orange Blossom Trl",
+    "addressLocality": "Orlando",
+    "addressRegion": "FL",
+    "postalCode": "32809",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 28.4632247,
+    "longitude": -81.3957101
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Sunday", "Monday", "Wednesday", "Friday", "Saturday"],
+      "opens": "12:00",
+      "closes": "15:30"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Sunday", "Monday", "Wednesday", "Friday", "Saturday"],
+      "opens": "17:30",
+      "closes": "22:30"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Thursday",
+      "opens": "11:30",
+      "closes": "15:30"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Thursday",
+      "opens": "17:30",
+      "closes": "22:30"
+    }
+  ],
+  "menu": "https://seasonsofindia.com/menu",
+  "acceptsReservations": true,
+  "orderUrl": "https://seasonsofindia.square.site/?location=L1BD20WGENNZ3",
+  "sameAs": [
+    "https://www.facebook.com/seasonsofindiaorlando/",
+    "https://instagram.com/seasonsofindia"
+  ]
+}
+</script>
 <style>
 /* ============================================================= tokens */
 :root{
@@ -1217,10 +1287,13 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
         const map = new Map();
         const categories = Array.isArray(miscData && miscData.categories) ? miscData.categories : [];
         categories
-          .filter(cat => cat && cat.active !== false)
+        .filter(cat => cat)
           .forEach(cat => {
             const key = normalizeCategoryName(cat.name);
-            if (key) map.set(key, Number(cat.sortOrder) || Number.MAX_SAFE_INTEGER);
+          const sortOrder = Number(cat.sortOrder);
+          if (key && Number.isFinite(sortOrder)) {
+            map.set(key, Math.min(map.get(key) ?? Number.MAX_SAFE_INTEGER, sortOrder));
+          }
           });
 
         const aliases = {
@@ -1471,7 +1544,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     function escapeHTML(s){ return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]); }
     function formatPrice(p){ if (p===undefined||p===null) return ''; return (Number(p)>=0 ? '$'+Number(p).toFixed(2) : ''); }
     function normalizeCategoryName(name){ return String(name||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,' ').trim(); }
-    function buildCategoryOrderMap(miscData){ const map=new Map(); const cats=Array.isArray(miscData&&miscData.categories)?miscData.categories:[]; cats.filter(c=>c&&c.active!==false).forEach(c=>{ const key=normalizeCategoryName(c.name); if(key) map.set(key, Number(c.sortOrder)||Number.MAX_SAFE_INTEGER); }); const aliases={ 'soups':'Soups','chaat':'Chaat','light food chaat':'Chaat','appetizers':'Appetizers','vegetarian appetizers':'Appetizers','from our tandoor veg and non veg':'From Our Tandoor - Veg & Non-Veg','from our tandoor veg non veg':'From Our Tandoor - Veg & Non-Veg','south indian':'South Indian','vegetable entrees':'Vegetarian Entrees','vegetarian entrees':'Vegetarian Entrees','non vegetable entrees':'Non-Vegetarian Entrees','non vegetarian entrees':'Non-Vegetarian Entrees','breads':'Breads','rice and noodles':'Rice & Noodles','rice and noodles specials':'Rice & Noodles','rice noodles':'Rice & Noodles','rice noodles specials':'Rice & Noodles','drinks':'Drinks','desserts':'Desserts','beverage':'Drinks','beer':'Drinks','wine':'Drinks' };
+    function buildCategoryOrderMap(miscData){ const map=new Map(); const cats=Array.isArray(miscData&&miscData.categories)?miscData.categories:[]; cats.filter(Boolean).forEach(c=>{ const key=normalizeCategoryName(c.name); const sortOrder=Number(c.sortOrder); if(key&&Number.isFinite(sortOrder)) map.set(key,Math.min(map.get(key)??Number.MAX_SAFE_INTEGER,sortOrder)); }); const aliases={ 'soups':'Soups','chaat':'Chaat','light food chaat':'Chaat','appetizers':'Appetizers','vegetarian appetizers':'Appetizers','from our tandoor veg and non veg':'From Our Tandoor - Veg & Non-Veg','from our tandoor veg non veg':'From Our Tandoor - Veg & Non-Veg','south indian':'South Indian','vegetable entrees':'Vegetarian Entrees','vegetarian entrees':'Vegetarian Entrees','non vegetable entrees':'Non-Vegetarian Entrees','non vegetarian entrees':'Non-Vegetarian Entrees','breads':'Breads','rice and noodles':'Rice & Noodles','rice and noodles specials':'Rice & Noodles','rice noodles':'Rice & Noodles','rice noodles specials':'Rice & Noodles','drinks':'Drinks','desserts':'Desserts','beverage':'Drinks','beer':'Drinks','wine':'Drinks' };
       const resolved=new Map(); for(const [k,v] of map.entries()){ const alias=aliases[k]||k; resolved.set(alias,v);} return resolved; }
 
     function aliasLookup(raw){ const key=normalizeCategoryName(raw||''); const map={'light food chaat':'Chaat','vegetarian entrees':'Vegetarian Entrees','non vegetarian entrees':'Non-Vegetarian Entrees','rice and noodles':'Rice & Noodles','rice and noodles specials':'Rice & Noodles'}; return map[key]||(raw||'Uncategorized'); }
@@ -1489,14 +1562,14 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 
     function applyFiltersFromControls(){ const q=(document.getElementById('menu-search').value||'').trim(); const activeCatEl=document.querySelector('#menu-cat-list .menu-cat-btn.active'); const cat=activeCatEl? activeCatEl.getAttribute('data-cat') : null; const tags=getSelectedTags(); filterAndRender({q,category:cat,tags}); }
 
-    function filterAndRender(opts){ opts=opts||{}; let q = (opts.q !== undefined && opts.q !== null) ? opts.q : (document.getElementById('menu-search').value || ''); q = String(q).trim().toLowerCase(); const cat=opts.category||null; const tags=Array.isArray(opts.tags)?opts.tags:(opts.tags===undefined?getSelectedTags():[]); const all=window.__menuItemsFallback||[]; if(!all.length){ renderMenu([], new Map()); return; } const filtered=all.filter(it=>{ if(cat){ const alias=aliasLookup(it.category); if(alias!==cat) return false; } if(tags.length){ const itTags=(it.tags||[]).map(x=>String(x)); const matchesTag=tags.some(t=> itTags.includes(t)); if(!matchesTag) return false; } if(!q) return true; const hay=[it.name,it.description,(it.tags||[]).join(' '),it.category,it.subcategory].filter(Boolean).join(' ').toLowerCase(); return q.split(/\s+/).every(tok=> hay.indexOf(tok)!==-1); }); renderMenu(filtered, new Map()); }
+    function filterAndRender(opts){ opts=opts||{}; let q = (opts.q !== undefined && opts.q !== null) ? opts.q : (document.getElementById('menu-search').value || ''); q = String(q).trim().toLowerCase(); const cat=opts.category||null; const tags=Array.isArray(opts.tags)?opts.tags:(opts.tags===undefined?getSelectedTags():[]); const all=window.__menuItemsFallback||[]; const categoryOrderMap=window.__categoryOrderMapFallback||new Map(); if(!all.length){ renderMenu([], categoryOrderMap); return; } const filtered=all.filter(it=>{ if(cat){ const alias=aliasLookup(it.category); if(alias!==cat) return false; } if(tags.length){ const itTags=(it.tags||[]).map(x=>String(x)); const matchesTag=tags.some(t=> itTags.includes(t)); if(!matchesTag) return false; } if(!q) return true; const hay=[it.name,it.description,(it.tags||[]).join(' '),it.category,it.subcategory].filter(Boolean).join(' ').toLowerCase(); return q.split(/\s+/).every(tok=> hay.indexOf(tok)!==-1); }); renderMenu(filtered, categoryOrderMap); }
 
     // wire up search & clear
     const searchEl=document.getElementById('menu-search'); const clearBtn=document.getElementById('menu-clear'); let searchTimer=null; if(searchEl){ searchEl.addEventListener('input', ()=>{ clearTimeout(searchTimer); searchTimer=setTimeout(()=> applyFiltersFromControls(), 140); }); searchEl.addEventListener('keyup', (e)=>{ if(e.key==='Enter') applyFiltersFromControls(); }); }
     if(clearBtn) clearBtn.addEventListener('click', ()=>{ if(document.getElementById('menu-search')) document.getElementById('menu-search').value=''; document.querySelectorAll('.menu-cat-btn.active').forEach(n=>n.classList.remove('active')); document.querySelectorAll('.menu-tag-btn.active').forEach(n=>n.classList.remove('active')); filterAndRender({}); });
 
     // load data and render
-    (async function(){ const misc = await safeFetchJson('./menu-misc.json'); const items = await safeFetchJson('./menu-items.json'); window.__menuItemsFallback = Array.isArray(items)? items: []; const categoryOrderMap = buildCategoryOrderMap(misc); renderCategoryButtons(window.__menuItemsFallback, categoryOrderMap); renderTagButtons(window.__menuItemsFallback); filterAndRender({}); try{ window.__menuFallbackInit = true; }catch(e){} })();
+    (async function(){ const misc = await safeFetchJson('./menu-misc.json'); const items = await safeFetchJson('./menu-items.json'); window.__menuItemsFallback = Array.isArray(items)? items: []; const categoryOrderMap = buildCategoryOrderMap(misc); window.__categoryOrderMapFallback = categoryOrderMap; renderCategoryButtons(window.__menuItemsFallback, categoryOrderMap); renderTagButtons(window.__menuItemsFallback); filterAndRender({}); try{ window.__menuFallbackInit = true; }catch(e){} })();
 
   })();
   </script>
